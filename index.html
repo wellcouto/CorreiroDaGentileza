@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Correio da Gentileza 💛 Setembro Amarelo</title>
+  
+  <!-- Fontes e Ícones -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-yellow: #f59e0b;
+      --light-yellow: #fef3c7;
+      --card-bg: #ffffff;
+      --bg-gradient: linear-gradient(180deg, #fffbeb 0%, #fef9c3 100%);
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --accent: #d97706;
+      --border-color: #fde68a;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 16px;
+      color: var(--text-main);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.15), 0 8px 10px -6px rgba(217, 119, 6, 0.1);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    header {
+      background: #fffbeb;
+      padding: 28px 20px 20px;
+      text-align: center;
+      border-bottom: 2px dashed #fde68a;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--light-yellow);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    form {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background-color: #fafafa;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary-yellow);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .anonymous-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fffdf5;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+    }
+
+    .anonymous-toggle input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary-yellow);
+      cursor: pointer;
+    }
+
+    .anonymous-toggle span {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #92400e;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+      transition: transform 0.15s ease, opacity 0.2s ease;
+      margin-top: 8px;
+    }
+
+    button[type="submit"]:active {
+      transform: scale(0.98);
+    }
+
+    button[type="submit"]:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Feedback de sucesso */
+    .success-card {
+      display: none;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .success-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    .success-card h2 {
+      color: #92400e;
+      margin-bottom: 8px;
+      font-size: 1.4rem;
+    }
+
+    .success-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-new {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <header>
+      <div class="badge">🎗️ Setembro Amarelo</div>
+      <h1>Correio da Gentileza</h1>
+      <p>Espalhe palavras de afeto, empatia e gratidão para iluminar o dia de alguém!</p>
+    </header>
+
+    <!-- Formulário do SheetMonkey -->
+    <!-- SUBSTITUA A URL DA ACTION PELO SEU ENDPOINT DO SHEETMONKEY -->
+    <form id="kindnessForm" action="https://api.sheetmonkey.io/form/qwuorY6mGNaNhDJSmE5z4r" method="POST">
+      
+      <!-- Opção de envio anônimo -->
+      <label class="anonymous-toggle">
+        <input type="checkbox" id="anonimoCheckbox" name="Anonimo" value="Sim">
+        <span>Enviar como Mensagem Anônima 🤫</span>
+      </label>
+
+      <!-- De (Remetente) -->
+      <div class="form-group" id="remetenteContainer">
+        <label for="de">De (Seu nome)</label>
+        <input type="text" id="de" name="De" placeholder="Ex: Lucas Silva" required>
+      </div>
+
+      <!-- Para (Destinatário) -->
+      <div class="form-group">
+        <label for="para">Para quem é o recado? *</label>
+        <input type="text" id="para" name="Para" placeholder="Nome do colega ou colaborador" required>
+      </div>
+
+      <!-- Local / Sala / Área -->
+      <div class="form-group">
+        <label for="local">Sala ou Área de encontro *</label>
+        <input type="text" id="local" name="Localizacao" placeholder="Ex: Sala 3, Copa, Lab de Informática..." required>
+      </div>
+
+      <!-- Contato: Email e Telefone/WhatsApp lado a lado -->
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="Email" placeholder="email@exemplo.com">
+        </div>
+        <div class="form-group">
+          <label for="telefone">WhatsApp/Tel</label>
+          <input type="tel" id="telefone" name="Telefone" placeholder="(00) 00000-0000">
+        </div>
+      </div>
+
+      <!-- Mensagem -->
+      <div class="form-group">
+        <label for="mensagem">Sua Mensagem Positiva *</label>
+        <textarea id="mensagem" name="Mensagem" placeholder="Escreva algo gentil, encorajador ou um agradecimento..." required></textarea>
+      </div>
+
+      <button type="submit" id="btnSubmit">
+        <span>Enviar Gentileza 💛</span>
+      </button>
+    </form>
+
+    <!-- Tela de Sucesso -->
+    <div class="success-card" id="successCard">
+      <div class="success-icon">💌✨</div>
+      <h2>Gentileza enviada!</h2>
+      <p>Sua mensagem foi entregue ao correio e logo aquecerá o coração de quem a receber.</p>
+      <button class="btn-new" id="btnNovoEnvio">Enviar outra mensagem</button>
+    </div>
+  </main>
+
+  <script>
+    const checkbox = document.getElementById('anonimoCheckbox');
+    const remetenteContainer = document.getElementById('remetenteContainer');
+    const deInput = document.getElementById('de');
+    const form = document.getElementById('kindnessForm');
+    const successCard = document.getElementById('successCard');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const btnNovoEnvio = document.getElementById('btnNovoEnvio');
+
+    // Alternar campo Remetente ao marcar "Anônimo"
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        remetenteContainer.style.display = 'none';
+        deInput.value = 'Anônimo';
+        deInput.removeAttribute('required');
+      } else {
+        remetenteContainer.style.display = 'flex';
+        deInput.value = '';
+        deInput.setAttribute('required', 'required');
+      }
+    });
+
+    // Envio assíncrono via fetch para não sair da página nem abrir redirect feio
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      btnSubmit.disabled = true;
+      btnSubmit.innerText = 'Enviando...';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          successCard.style.display = 'block';
+          form.reset();
+          // restaura estado caso estivesse anônimo
+          remetenteContainer.style.display = 'flex';
+          deInput.setAttribute('required', 'required');
+        } else {
+          alert('Houve um problema ao registrar a mensagem. Tente novamente.');
+        }
+      } catch (error) {
+        alert('Erro de conexão ao enviar. Verifique a internet e tente novamente.');
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = '<span>Enviar Gentileza 💛</span>';
+      }
+    });
+
+    // Botão para resetar e mandar nova mensagem
+    btnNovoEnvio.addEventListener('click', () => {
+      successCard.style.display = 'none';
+      form.style.display = 'flex';
+    });
+  </script>
+</body>
+</html>
